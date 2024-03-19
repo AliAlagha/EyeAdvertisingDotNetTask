@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace EyeAdvertisingDotNetTask.Core.Exceptions
 {
-    public class InvalidLoginCredintialesException : Exception
+    public class UserAlreadyExistsException : Exception
     {
-        public InvalidLoginCredintialesException()
-            : base(Messages.InvalidLoginCredintiales)
+        public UserAlreadyExistsException()
+            : base(Messages.UserAlreadyExists)
         {
         }
     }

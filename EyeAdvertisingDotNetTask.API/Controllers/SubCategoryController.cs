@@ -31,18 +31,14 @@ namespace EyeAdvertisingDotNetTask.API.Controllers
         public Task<ActionResult> Create(CreateSubCategoryDto dto)
             => GetResponse(async () =>
             {
-                await _subCategoryService.Create(dto, UserId);
-
-                return new ApiResponseViewModel(true, Messages.PostRequest);
+                return new ApiResponseViewModel(await _subCategoryService.Create(dto, UserId), true, Messages.PostRequest);
             });
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public Task<ActionResult> Update(UpdateSubCategoryDto dto)
             => GetResponse(async () =>
             {
-                await _subCategoryService.Update(dto, UserId);
-
-                return new ApiResponseViewModel(true, Messages.PutRequest);
+                return new ApiResponseViewModel(await _subCategoryService.Update(dto, UserId), true, Messages.PutRequest);
             });
 
         [HttpDelete("{id}")]

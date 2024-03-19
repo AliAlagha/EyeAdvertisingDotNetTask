@@ -37,19 +37,49 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Auth
             _jwtConfigOptions = options.Value;
         }
 
+        public async Task<string> Register(RegisterDto dto)
+        {
+            var isEmailExists = await _context.Users
+                .AnyAsync(x => x.Email.ToLower().Equals(dto.Email.ToLower()));
+            if (isEmailExists)
+            {
+                throw new UserAlreadyExistsException();
+            }
+
+            var user = new User
+            {
+                Email = dto.Email,
+                UserName = dto.Email,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                IsActive = true,
+                PhoneNumberConfirmed = true,
+                EmailConfirmed = true
+            };
+
+            string userId = "";
+            var result = await _userManager.CreateAsync(user, dto.Password);
+            if (result.Succeeded)
+            {
+                userId = user.Id;
+            }
+
+            return userId;
+        }
+
         public async Task<LoginResponseViewModel> Login(LoginDto dto)
         {
             var user = await _context.Users
                 .SingleOrDefaultAsync(x => x.UserName.Equals(dto.Username));
             if (user == null)
             {
-                throw new InvalidLoginCredintialesException();
+                throw new InvalidLoginCredentialsException();
             }
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, dto.Password, false);
             if (!result.Succeeded)
             {
-                throw new InvalidLoginCredintialesException();
+                throw new InvalidLoginCredentialsException();
             }
 
             return new LoginResponseViewModel

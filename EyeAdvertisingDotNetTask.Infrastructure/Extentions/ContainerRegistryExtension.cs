@@ -1,4 +1,5 @@
-﻿using EyeAdvertisingDotNetTask.Infrastructure.Services.Auth;
+﻿using EyeAdvertisingDotNetTask.Infrastructure.Files;
+using EyeAdvertisingDotNetTask.Infrastructure.Services.Auth;
 using EyeAdvertisingDotNetTask.Infrastructure.Services.Categories;
 using EyeAdvertisingDotNetTask.Infrastructure.Services.Products;
 using EyeAdvertisingDotNetTask.Infrastructure.Services.SubCategories;
@@ -14,6 +15,7 @@ namespace SBS.Infrastructure.Extensions
             services.AddScoped<ISubCategoryService, SubCategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddSingleton<IFileService, FileService>();
 
             return services;
         }

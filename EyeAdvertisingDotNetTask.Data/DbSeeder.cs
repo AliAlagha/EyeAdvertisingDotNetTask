@@ -55,7 +55,7 @@ namespace EyeAdvertisingDotNetTask.Data
                 EmailConfirmed = true
             };
 
-            var result = await userManager.CreateAsync(user, "User2024$$");
+            await userManager.CreateAsync(user, "User2024$$");
         }
 
     }

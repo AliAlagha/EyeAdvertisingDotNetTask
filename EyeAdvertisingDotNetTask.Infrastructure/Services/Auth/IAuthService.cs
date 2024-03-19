@@ -5,6 +5,7 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Auth
 {
     public interface IAuthService
     {
+        Task<string> Register(RegisterDto dto);
         Task<LoginResponseViewModel> Login(LoginDto dto);
     }
 }

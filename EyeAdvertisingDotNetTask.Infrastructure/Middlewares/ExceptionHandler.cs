@@ -34,7 +34,7 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Middlewares
 
             switch (exception)
             {
-                case EntityNotFoundException entityNotFound:
+                case EntityNotFoundException:
                     context.Response.StatusCode = (int)HttpStatusCode.NotFound;
                     break;
                 default:

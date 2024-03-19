@@ -28,14 +28,15 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.SubCategories
         {
             var query = _context.SubCategories
                 .Include(x => x.Category)
-                .Include(x => x.Products)
                 .OrderByDescending(x => x.CreatedAt).AsQueryable();
             return await query.ToPagedData<SubCategoryViewModel>(pagingDto, _mapper);
         }
 
         public async Task<SubCategoryViewModel> Get(int id)
         {
-            var subCategory = await _context.SubCategories.SingleOrDefaultAsync(x => x.Id == id);
+            var subCategory = await _context.SubCategories
+                .Include(x => x.Category)
+                .SingleOrDefaultAsync(x => x.Id == id);
             if (subCategory == null)
             {
                 throw new EntityNotFoundException();
@@ -64,8 +65,8 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.SubCategories
                 throw new EntityNotFoundException();
             }
 
-            subCategory.UpdatedById = userId;
             _mapper.Map(dto, subCategory);
+            subCategory.UpdatedById = userId;
             _context.SubCategories.Update(subCategory);
             await _context.SaveChangesAsync();
 

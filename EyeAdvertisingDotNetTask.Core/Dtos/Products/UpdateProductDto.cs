@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace EyeAdvertisingDotNetTask.Core.Dtos.Products
         public string Description { get; set; }
         public int Qty { get; set; }
         public int InStock { get; set; }
-        public string ProductImgs { get; set; }
+        public List<IFormFile> ProductImgs { get; set; }
         public int SubCategoryId { get; set; }
     }
 }

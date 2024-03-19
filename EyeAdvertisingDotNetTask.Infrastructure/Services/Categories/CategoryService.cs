@@ -60,8 +60,8 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Categories
                 throw new EntityNotFoundException();
             }
 
-            category.UpdatedById = userId;
             _mapper.Map(dto, category);
+            category.UpdatedById = userId;
             _context.Categories.Update(category);
             await _context.SaveChangesAsync();
 

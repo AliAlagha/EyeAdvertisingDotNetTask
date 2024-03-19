@@ -18,6 +18,11 @@ namespace EyeAdvertisingDotNetTask.API.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        public Task<ActionResult> Register(RegisterDto dto)
+           => GetResponse(async () => new ApiResponseViewModel(await _authService.Register(dto), true, Messages.SuccessfulOperation));
+
+        [HttpPost]
+        [AllowAnonymous]
         public Task<ActionResult> Login(LoginDto dto)
            => GetResponse(async () => new ApiResponseViewModel(await _authService.Login(dto), true, Messages.SuccessfulOperation));
 
