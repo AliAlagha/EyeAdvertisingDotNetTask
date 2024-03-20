@@ -16,5 +16,6 @@ namespace EyeAdvertisingDotNetTask.Core.Constants
         public const string PutRequest = "The data has been updated successfully";
         public const string DeleteRequest = "The data has been deleted successfully";
         public const string UserAlreadyExists = "User Already Exists";
+        public const string InvalidRefreshToken = "Invalid Refresh Token";
     }
 }

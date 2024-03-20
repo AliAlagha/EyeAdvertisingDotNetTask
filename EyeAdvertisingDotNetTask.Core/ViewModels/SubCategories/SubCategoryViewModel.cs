@@ -15,5 +15,6 @@ namespace EyeAdvertisingDotNetTask.Core.ViewModels.SubCategories
         public string Name { get; set; }
         public string Description { get; set; }
         public CategoryViewModel Category { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

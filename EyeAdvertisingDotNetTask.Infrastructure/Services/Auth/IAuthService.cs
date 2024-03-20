@@ -7,5 +7,6 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Auth
     {
         Task<string> Register(RegisterDto dto);
         Task<LoginResponseViewModel> Login(LoginDto dto);
+        Task<LoginResponseViewModel> RefreshToken(RefreshTokenDto dto);
     }
 }

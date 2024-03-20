@@ -26,5 +26,8 @@ namespace EyeAdvertisingDotNetTask.API.Controllers
         public Task<ActionResult> Login(LoginDto dto)
            => GetResponse(async () => new ApiResponseViewModel(await _authService.Login(dto), true, Messages.SuccessfulOperation));
 
+        [HttpPost]
+        public Task<ActionResult> RefreshToken(RefreshTokenDto dto)
+            => GetResponse(async () => new ApiResponseViewModel(await _authService.RefreshToken(dto), true, Messages.SuccessfulOperation));
     }
 }

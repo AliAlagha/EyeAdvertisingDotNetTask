@@ -17,5 +17,6 @@ namespace EyeAdvertisingDotNetTask.Core.ViewModels.Products
         public int InStock { get; set; }
         public List<string> ProductImgsList { get; set; }
         public SubCategoryViewModel SubCategory { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

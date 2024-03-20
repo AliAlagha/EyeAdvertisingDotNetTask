@@ -18,6 +18,9 @@ namespace EyeAdvertisingDotNetTask.Data.DbEntities
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";
 
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpireAt { get; set; }
+
         public bool IsDeleted { get; set; }
         public bool IsActive { get; set; }
         public string? CreatedById { get; set; }

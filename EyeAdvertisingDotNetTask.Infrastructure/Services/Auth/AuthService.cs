@@ -89,6 +89,22 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Auth
             };
         }
 
+        public async Task<LoginResponseViewModel> RefreshToken(RefreshTokenDto dto)
+        {
+            var user = await _context.Users
+                .SingleOrDefaultAsync(x => x.RefreshToken == dto.RefreshToken);
+
+            if (user == null) throw new InvalidRefreshTokenException();
+
+            if (user.RefreshTokenExpireAt < DateTime.Now) throw new SecurityTokenExpiredException();
+
+            return new LoginResponseViewModel
+            {
+                Token = await GenerateAccessToken(user),
+                User = user.FullName
+            };
+        }
+
         private async Task<AccessTokenViewModel> GenerateAccessToken(User user)
         {
             var roles = await _userManager.GetRolesAsync(user);
@@ -117,10 +133,17 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Auth
                 signingCredentials: credentials
             );
 
+            user.RefreshToken = Guid.NewGuid().ToString();
+            user.RefreshTokenExpireAt = DateTime.Now.AddMonths(1);
+
+            await _userManager.UpdateAsync(user);
+
             return new AccessTokenViewModel
             {
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(accessToken),
-                ExpiredAt = expires
+                RefreshToken = user.RefreshToken,
+                AccessTokenExpiredAt = expires,
+                RefreshTokenExpiredAt = user.RefreshTokenExpireAt.Value
             };
         }
 
