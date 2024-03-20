@@ -13,15 +13,9 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Middlewares
 {
     public class ExceptionHandler
     {
-        private readonly RequestDelegate _next;
-
-        private readonly IServiceProvider _serviceProvider;
-
-        public ExceptionHandler(RequestDelegate next,
-                                IServiceProvider serviceProvider)
+        public ExceptionHandler()
         {
-            _next = next;
-            _serviceProvider = serviceProvider;
+
         }
 
         public async Task Invoke(HttpContext context)

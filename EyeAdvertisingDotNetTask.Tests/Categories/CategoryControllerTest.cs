@@ -104,7 +104,7 @@ namespace EyeAdvertisingDotNetTask.Tests.Categories
             // Arrange
             var createCategoryDto = new CreateCategoryDto
             {
-                Description = "Category Description"
+                Description = "New Category Description"
             };
 
             _categoryControllerFake.ModelState.AddModelError("Name", "Required");
@@ -122,8 +122,8 @@ namespace EyeAdvertisingDotNetTask.Tests.Categories
             // Arrange
             var createCategoryDto = new CreateCategoryDto
             {
-                Name = "Category Name",
-                Description = "Category Description"
+                Name = "New Category Name",
+                Description = "New Category Description"
             };
 
             // Act
@@ -159,7 +159,7 @@ namespace EyeAdvertisingDotNetTask.Tests.Categories
             var updateCategoryDto = new UpdateCategoryDto
             {
                 Id = 1,
-                Description = "Category Description"
+                Description = "Edited Category Description"
             };
 
             _categoryControllerFake.ModelState.AddModelError("Name", "Required");

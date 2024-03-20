@@ -1,7 +1,7 @@
 ﻿using EyeAdvertisingDotNetTask.Core.Dtos.General;
 using EyeAdvertisingDotNetTask.Core.Dtos.Products;
 using EyeAdvertisingDotNetTask.Core.Exceptions;
-using EyeAdvertisingDotNetTask.Core.Helper;
+using EyeAdvertisingDotNetTask.Core.Helpers;
 using EyeAdvertisingDotNetTask.Core.ViewModels.General;
 using EyeAdvertisingDotNetTask.Core.ViewModels.Products;
 using EyeAdvertisingDotNetTask.Data.DbEntities;

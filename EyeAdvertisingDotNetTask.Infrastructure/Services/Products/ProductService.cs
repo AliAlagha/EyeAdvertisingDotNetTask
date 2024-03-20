@@ -4,7 +4,7 @@ using EyeAdvertisingDotNetTask.Core.Dtos.Categories;
 using EyeAdvertisingDotNetTask.Core.Dtos.General;
 using EyeAdvertisingDotNetTask.Core.Dtos.Products;
 using EyeAdvertisingDotNetTask.Core.Exceptions;
-using EyeAdvertisingDotNetTask.Core.Helper;
+using EyeAdvertisingDotNetTask.Core.Helpers;
 using EyeAdvertisingDotNetTask.Core.ViewModels.Categories;
 using EyeAdvertisingDotNetTask.Core.ViewModels.General;
 using EyeAdvertisingDotNetTask.Core.ViewModels.Products;
@@ -84,16 +84,20 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Products
         {
             var product = _mapper.Map<CreateProductDto, Product>(dto);
 
+            // Add product imgs
             var productImgs = new List<string>();
-            foreach (var productImg in dto.ProductImgs)
+            if (dto.ProductImgs != null && dto.ProductImgs.Any())
             {
-                var fileName = await _fileService.SaveFile(productImg, FolderNames.Images);
-                if (fileName != null)
+                foreach (var productImg in dto.ProductImgs)
                 {
-                    productImgs.Add(fileName);
+                    var fileName = await _fileService.SaveFile(productImg, FolderNames.Images);
+                    if (fileName != null)
+                    {
+                        productImgs.Add(fileName);
+                    }
                 }
             }
-            
+
             product.ProductImgs = JsonConvert.SerializeObject(productImgs);
             product.CreatedById = userId;
             await _context.Products.AddAsync(product);
@@ -111,13 +115,17 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Products
                 throw new EntityNotFoundException();
             }
 
+            // Update product imgs
             var productImgs = new List<string>();
-            foreach (var productImg in dto.ProductImgs)
+            if (dto.ProductImgs != null && dto.ProductImgs.Any())
             {
-                var fileName = await _fileService.SaveFile(productImg, FolderNames.Images);
-                if (fileName != null)
+                foreach (var productImg in dto.ProductImgs)
                 {
-                    productImgs.Add(fileName);
+                    var fileName = await _fileService.SaveFile(productImg, FolderNames.Images);
+                    if (fileName != null)
+                    {
+                        productImgs.Add(fileName);
+                    }
                 }
             }
 

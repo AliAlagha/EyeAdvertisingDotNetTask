@@ -21,19 +21,16 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Auth
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IMapper _mapper;
         private readonly JwtConfigOptions _jwtConfigOptions;
 
         public AuthService(ApplicationDbContext context,
                            UserManager<User> userManager,
-                           IMapper mapper,
                            SignInManager<User> signInManager,
                            IOptions<JwtConfigOptions> options)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
-            _mapper = mapper;
             _jwtConfigOptions = options.Value;
         }
 
@@ -105,6 +102,7 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Auth
             };
         }
 
+        #region Helpers
         private async Task<AccessTokenViewModel> GenerateAccessToken(User user)
         {
             var roles = await _userManager.GetRolesAsync(user);
@@ -134,7 +132,7 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Auth
             );
 
             user.RefreshToken = Guid.NewGuid().ToString();
-            user.RefreshTokenExpireAt = DateTime.Now.AddMonths(1);
+            user.RefreshTokenExpireAt = DateTime.Now.AddMonths(6);
 
             await _userManager.UpdateAsync(user);
 
@@ -146,6 +144,7 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Auth
                 RefreshTokenExpiredAt = user.RefreshTokenExpireAt.Value
             };
         }
+        #endregion
 
     }
 }

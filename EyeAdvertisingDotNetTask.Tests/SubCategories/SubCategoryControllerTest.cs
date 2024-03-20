@@ -97,7 +97,7 @@ namespace EyeAdvertisingDotNetTask.Tests.SubCategories
             // Arrange
             var createCategoryDto = new CreateSubCategoryDto
             {
-                Description = "Category Description",
+                Description = "New SubCategory Description",
                 CategoryId = 1
             };
 
@@ -116,8 +116,8 @@ namespace EyeAdvertisingDotNetTask.Tests.SubCategories
             // Arrange
             var createCategoryDto = new CreateSubCategoryDto
             {
-                Name = "SubCategory Name",
-                Description = "SubCategory Description",
+                Name = "New SubCategory Name",
+                Description = "New SubCategory Description",
                 CategoryId = 1
             };
 

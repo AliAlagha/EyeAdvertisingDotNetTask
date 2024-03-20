@@ -19,16 +19,19 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.AutoMapper
     {
         public MappingProfile()
         {
+            // Category
             CreateMap<CreateCategoryDto, Category>();
             CreateMap<UpdateCategoryDto, Category>();
             CreateMap<Category, UpdateCategoryDto>();
             CreateMap<Category, CategoryViewModel>();
 
+            // SubCategory
             CreateMap<CreateSubCategoryDto, SubCategory>();
             CreateMap<UpdateSubCategoryDto, SubCategory>();
             CreateMap<SubCategory, UpdateSubCategoryDto>();
             CreateMap<SubCategory, SubCategoryViewModel>();
 
+            // Product
             CreateMap<CreateProductDto, Product>();
             CreateMap<UpdateProductDto, Product>();
             CreateMap<Product, UpdateProductDto>();

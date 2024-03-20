@@ -12,7 +12,7 @@ namespace EyeAdvertisingDotNetTask.Data.DbEntities
         public string Description { get; set; }
         public int Qty { get; set; }
         public int InStock { get; set; }
-        public string ProductImgs { get; set; }
+        public string? ProductImgs { get; set; }
         public int SubCategoryId { get; set; }
         public SubCategory SubCategory { get; set; }
     }

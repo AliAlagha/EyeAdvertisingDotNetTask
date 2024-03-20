@@ -107,7 +107,10 @@ namespace EyeAdvertisingDotNetTask.Tests.Products
             // Arrange
             var createProductDto = new CreateProductDto
             {
-                Description = "Product Description"
+                Description = "New Product Description",
+                Qty = 54,
+                InStock = 987,
+                SubCategoryId = 1
             };
 
             _productControllerFake.ModelState.AddModelError("Name", "Required");

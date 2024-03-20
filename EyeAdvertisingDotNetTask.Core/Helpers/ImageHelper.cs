@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EyeAdvertisingDotNetTask.Core.Helper
+namespace EyeAdvertisingDotNetTask.Core.Helpers
 {
     public class ImageHelper
     {
+        // GetImageLinks function deserializes json array of Image names and returns a list of image paths
         public static List<string> GetImageLinks(string jsonImgsArr)
         {
             var imgsFinalArr = new List<string>();
