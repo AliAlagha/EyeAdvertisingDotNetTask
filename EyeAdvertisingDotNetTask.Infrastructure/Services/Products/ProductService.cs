@@ -82,6 +82,13 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Products
 
         public async Task<int> Create(CreateProductDto dto, string userId)
         {
+            var subCategory = await _context.SubCategories
+                .SingleOrDefaultAsync(x => x.Id == dto.SubCategoryId);
+            if (subCategory == null)
+            {
+                throw new EntityNotFoundException();
+            }
+
             var product = _mapper.Map<CreateProductDto, Product>(dto);
 
             // Add product imgs
@@ -108,6 +115,13 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.Products
 
         public async Task<int> Update(UpdateProductDto dto, string userId)
         {
+            var subCategory = await _context.SubCategories
+                .SingleOrDefaultAsync(x => x.Id == dto.SubCategoryId);
+            if (subCategory == null)
+            {
+                throw new EntityNotFoundException();
+            }
+
             var product = await _context.Products
                 .SingleOrDefaultAsync(x => x.Id == dto.Id);
             if (product == null)

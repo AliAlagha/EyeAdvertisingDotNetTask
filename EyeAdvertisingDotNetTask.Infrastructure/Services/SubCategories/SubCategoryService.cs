@@ -48,6 +48,13 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.SubCategories
 
         public async Task<int> Create(CreateSubCategoryDto dto, string userId)
         {
+            var category = await _context.Categories
+                .SingleOrDefaultAsync(x => x.Id == dto.CategoryId);
+            if (category == null)
+            {
+                throw new EntityNotFoundException();
+            }
+
             var subCategory = _mapper.Map<CreateSubCategoryDto, SubCategory>(dto);
             subCategory.CreatedById = userId;
             await _context.SubCategories.AddAsync(subCategory);
@@ -58,6 +65,13 @@ namespace EyeAdvertisingDotNetTask.Infrastructure.Services.SubCategories
 
         public async Task<int> Update(UpdateSubCategoryDto dto, string userId)
         {
+            var category = await _context.Categories
+                .SingleOrDefaultAsync(x => x.Id == dto.CategoryId);
+            if (category == null)
+            {
+                throw new EntityNotFoundException();
+            }
+
             var subCategory = await _context.SubCategories
                 .SingleOrDefaultAsync(x => x.Id == dto.Id);
             if (subCategory == null)
